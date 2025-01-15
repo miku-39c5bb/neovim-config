@@ -1,71 +1,112 @@
-local cmp_status_ok, cmp = pcall(require, "cmp")
-if not cmp_status_ok then
-  return
-end
+return {
+    {
+        'saghen/blink.cmp',
+        dependencies = {
+            'rafamadriz/friendly-snippets',
+        },
+        version = '*',
+        event = "InsertEnter",
+        cond = vim.g.is_not_large,
+        opts = {
+            completion = {
+                menu = {
+                    min_width = 5,
+                    border = 'single',
+                    draw = {
+                        padding = 0,
+                        gap = 1,
+                        columns = { { 'kind_icon' }, { 'label', 'kind', gap = 1 } },
+                        components = {
+                            kind_icon = {
+                                ellipsis = false,
+                                text = function(ctx)
+                                    local kind_icon, _, _ = require('mini.icons').get('lsp', ctx.kind)
+                                    return kind_icon
+                                end,
+                                -- highlight will be provided by catppuccin
+                            }
+                        }
+                    },
+                },
+                documentation = {
+                    auto_show = true,
+                    auto_show_delay_ms = 500,
+                    window = { border = 'rounded' },
+                },
+            },
+            -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
+            keymap = {
+                preset = 'super-tab',
+                ['<CR>'] = { 'accept', 'fallback' },
+                ['<Tab>'] = {
+                    'accept',
+                    function()
+                        if require("copilot.suggestion").is_visible() then
+                            require("copilot.suggestion").accept()
+                            return true
+                        end
+                    end,
+                    'snippet_forward',
+                    'fallback'
+                },
+                ['<S-Tab>'] = {
+                    'hide',
+                    function()
+                        if require("copilot.suggestion").is_visible() then
+                            require("copilot.suggestion").dismiss()
+                            return true
+                        end
+                    end,
+                    'snippet_backward',
+                    'fallback'
+                },
+            },
+            sources = {
+                default = function(ctx)
+                    local success, node = pcall(vim.treesitter.get_node_at_cursor)
+                    if vim.bo.filetype == 'markdown' then
+                        return { 'buffer', 'path' }
+                    elseif success and node and vim.tbl_contains({ 'comment', 'line_comment', 'block_comment' }, node:type()) then
+                        return { 'buffer', 'path' }
+                    else
+                        return { 'lsp', 'path', 'snippets', 'buffer' }
+                    end
+                end,
+                cmdline = {},
 
-local snip_status_ok, luasnip = pcall(require, "luasnip")
-if not snip_status_ok then
-  return
-end
-
-require("luasnip.loaders.from_vscode").lazy_load()
-
--- 下面会用到这个函数
-local check_backspace = function()
-  local col = vim.fn.col "." - 1
-  return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
-end
-
-
-cmp.setup({
-  snippet = {
-    expand = function(args)
-      require('luasnip').lsp_expand(args.body)
-    end,
-  },
-  mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-e>'] = cmp.mapping.abort(),  -- 取消补全，esc也可以退出
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-
-    ["<Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
-      elseif luasnip.expandable() then
-        luasnip.expand()
-      elseif luasnip.expand_or_jumpable() then
-        luasnip.expand_or_jump()
-      elseif check_backspace() then
-        fallback()
-      else
-        fallback()
-      end
-    end, {
-      "i",
-      "s",
-    }),
-
-    ["<S-Tab>"] = cmp.mapping(function(fallback)
-      if cmp.visible() then
-        cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
-      else
-        fallback()
-      end
-    end, {
-      "i",
-      "s",
-    }),
-  }),
-
-  -- 这里重要
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'luasnip' },
-    { name = 'path' },
-  }, {
-    { name = 'buffer' },
-  })
-})
+            },
+        },
+    },
+    {
+        'zbirenbaum/copilot.lua',
+        event = "InsertEnter",
+        cond = vim.g.is_not_large,
+        config = function()
+            require('copilot').setup({
+                panel = {
+                    enabled = false,
+                },
+                suggestion = {
+                    enabled = true,
+                    auto_trigger = true,
+                    debounce = 75,
+                    keymap = {
+                        accept = false,
+                    },
+                },
+                filetypes = {
+                    yaml = true,
+                    markdown = false,
+                    help = false,
+                    gitcommit = false,
+                    gitrebase = false,
+                    hgcommit = false,
+                    ["."] = false,
+                    ["Dockerfile"] = true,
+                },
+                copilot_node_command = 'node', -- Node.js version must be > 16.x
+                server_opts_overrides = {},
+            })
+        end
+    },
+}

@@ -1,17 +1,12 @@
-require("plugins.plugins-setup")
+vim.loader.enable()
 
-require("core.options")
-require("core.keymaps")
+-- When you do require("foo.bar"), Neovim will try to load one of these file patterns:
+-- lua/foo/bar.lua
+-- lua/foo/bar/init.lua
 
--- 插件
-require("plugins.lualine")
-require("plugins/nvim-tree")
-require("plugins/treesitter")
-require("plugins/lsp")
-require("plugins/cmp")
-require("plugins/comment")
-require("plugins/autopairs")
-require("plugins/bufferline")
-require("plugins/gitsigns")
-require("plugins/telescope")
-
+-- register global functions first
+require("utils")
+require("base")
+require("plugins")
+require("autocmd")
+require("keymap")
