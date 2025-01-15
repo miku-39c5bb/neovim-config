@@ -34,5 +34,6 @@ opt.smartcase = true
 -- 外观。终端真颜色，会覆盖终端背景图片；左侧多一列，方便debug和插件提示；主题
 opt.termguicolors = true
 opt.signcolumn = "yes"
-vim.cmd[[colorscheme tokyonight-moon]]
+-- vim.cmd[[colorscheme tokyonight-moon]]
+vim.cmd[[colorscheme molokai]]
 

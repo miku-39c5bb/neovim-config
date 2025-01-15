@@ -14,6 +14,7 @@ vim.opt.rtp:prepend(lazypath)
 
 local plugins = {
   "folke/tokyonight.nvim", -- 主题
+  "tomasr/molokai",
   "nvim-lualine/lualine.nvim",  -- 状态栏
   "nvim-tree/nvim-tree.lua",  -- 文档树
   "nvim-tree/nvim-web-devicons", -- 文档树图标
