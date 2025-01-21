@@ -4,20 +4,22 @@ local Base = {
         {
             { "n", "v" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, desc = "go to next wrapline" },
         },
-        { { "n", "v" }, "k",     "v:count == 0 ? 'gk' : 'k'",                    { expr = true, silent = true, desc = "go to previous wrapline" }, },
-        { { "n", "v" }, "L",     "g_",                                           { desc = "go to line end" } },
-        { { "n", "v" }, "H",     "^",                                            { desc = "go to line begin" } },
+        { { "n", "v" }, "k",         "v:count == 0 ? 'gk' : 'k'",                    { expr = true, silent = true, desc = "go to previous wrapline" }, },
+        { { "n", "v" }, "L",         "g_",                                           { desc = "go to line end" } },
+        { { "n", "v" }, "H",         "^",                                            { desc = "go to line begin" } },
 
         -- page scroll
-        { { "n", "v" }, "<C-u>", math.floor(vim.fn.winheight(0) / 2) .. "<C-u>", { desc = "scroll half page forward" }, },
-        { { "n", "v" }, "<C-d>", math.floor(vim.fn.winheight(0) / 2) .. "<C-d>", { desc = "scroll half page backward" }, },
+        { { "n", "v" }, "<C-u>",     math.floor(vim.fn.winheight(0) / 2) .. "<C-u>", { desc = "scroll half page forward" }, },
+        { { "n", "v" }, "<C-d>",     math.floor(vim.fn.winheight(0) / 2) .. "<C-d>", { desc = "scroll half page backward" }, },
 
-        { "n",          "<C-i>", "<C-i>",                                        { desc = "fix conflict caused by <Tab> mapping, no need in vscode" }, },
+        { "n",          "<C-i>",     "<C-i>",                                        { desc = "fix conflict caused by <Tab> mapping, no need in vscode" }, },
         -- { "n",          "<Tab>", "<C-w>W",                                       { desc = "move to window" } },
-        { "n",          "<C-h>", require('smart-splits').move_cursor_left,       { desc = "focus leftside window" } },
-        { "n",          "<C-j>", require('smart-splits').move_cursor_down,       { desc = "focus downside window" } },
-        { "n",          "<C-k>", require('smart-splits').move_cursor_up,         { desc = "focus upside window" } },
-        { "n",          "<C-l>", require('smart-splits').move_cursor_right,      { desc = "focus rightside window" } },
+        { "n",          "<leader>|", "<C-w>v",                                       { desc = "split window" } },
+        { "n",          "<leader>-", "<C-w>s",                                       { desc = "vsplit window" } },
+        { "n",          "<C-h>",     require('smart-splits').move_cursor_left,       { desc = "focus leftside window" } },
+        { "n",          "<C-j>",     require('smart-splits').move_cursor_down,       { desc = "focus downside window" } },
+        { "n",          "<C-k>",     require('smart-splits').move_cursor_up,         { desc = "focus upside window" } },
+        { "n",          "<C-l>",     require('smart-splits').move_cursor_right,      { desc = "focus rightside window" } },
     },
     edit = {
         { "n", "<C-a>",       "ggVG",   { desc = "select all" } },
@@ -64,12 +66,12 @@ local Base = {
 
 local Plugin = {
     fzf = {
-        { "n", "sw", function() require("fzf-lua").live_grep() end,           { desc = "search word" }, },
-        { "n", "sf", function() require("fzf-lua").files() end,               { desc = "search file" }, },
-        { "n", "z",  function() require("fzf-lua").buffers() end,             { desc = "search buffer" }, },
-        { "n", "ga", function() require("fzf-lua").lsp_code_actions() end,    { desc = "code action" }, },
-        { "n", "gr", function() require("fzf-lua").lsp_references() end,      { desc = "find reference" }, },
-        { "n", "gi", function() require("fzf-lua").lsp_implementations() end, { desc = "find implementations" }, },
+        { "n", "<leader>w", function() require("fzf-lua").live_grep() end,           { desc = "search word" }, },
+        { "n", "<leader>f", function() require("fzf-lua").files() end,               { desc = "search file" }, },
+        { "n", "z",         function() require("fzf-lua").buffers() end,             { desc = "search buffer" }, },
+        { "n", "ga",        function() require("fzf-lua").lsp_code_actions() end,    { desc = "code action" }, },
+        { "n", "gr",        function() require("fzf-lua").lsp_references() end,      { desc = "find reference" }, },
+        { "n", "gi",        function() require("fzf-lua").lsp_implementations() end, { desc = "find implementations" }, },
     },
     -- more keymaps in cmp.lua
     cmp = {},

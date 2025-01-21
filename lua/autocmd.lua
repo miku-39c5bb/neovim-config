@@ -37,10 +37,10 @@ vim.api.nvim_create_autocmd({ "VimResized" }, {
     end,
 })
 
-vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
-    pattern = { "*" },
-    command = "silent! wa",
-})
+-- vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
+--     pattern = { "*" },
+--     command = "silent! wa",
+-- })
 
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "yml", "yaml", "json", "html", "css", "javascript", "typescript", "sh", "sql", "vue", "markdown" },
