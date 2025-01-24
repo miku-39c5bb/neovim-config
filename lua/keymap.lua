@@ -39,7 +39,7 @@ local Base = {
         { "n",          "q",          "<CMD>q!<CR>",                                       { desc = "quit neovim" } },
         { "n",          "Q",          "q",                                                 { desc = "macro record" } },
         { "n",          "g=",         vim.g.format,                                        { desc = "format document" } },
-        { "n",          "<leader>mk", "<CMD>!python3 ./build.py<CR>",                      { desc = "build" } },
+        { "n",          "<leader>mk", "<CMD>wa<CR><CMD>!python3 ./build.py<CR>",           { desc = "build" } },
         { "n",          "<leader>cl", "<CMD>!python3 ./build.py clean<CR>",                { desc = "build" } },
         -- { "n",          "<leader>T",  "<CMD>split<CR><CMD>terminal<CR>",    { desc = "build" } },
         { "n",          "<A-i>",      "<CMD>lua require('FTerm').toggle()<CR>",            { desc = "terminal" } },
