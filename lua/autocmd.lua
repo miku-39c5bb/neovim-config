@@ -24,10 +24,10 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     callback = vim.highlight.on_yank
 })
 
-vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = "*",
-    callback = vim.g.format,
-})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--     pattern = "*",
+--     callback = vim.g.format,
+-- })
 
 vim.api.nvim_create_autocmd({ "VimResized" }, {
     callback = function()

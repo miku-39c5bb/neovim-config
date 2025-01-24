@@ -84,7 +84,14 @@ local Plugin = {
     surround = {},
     -- more keymaps in neotree.lua
     neotree = { { "n", "t", function() vim.cmd("Neotree reveal toggle") end, { desc = "toggle neotree" }, }, },
+    hop = {
+        { "n", "<leader>e", function() require("hop") vim.cmd("HopWordAC") end,{desc="hop word in after content" } },
+        { "n", "<leader>b", function() require("hop") vim.cmd("HopWordBC") end,{desc="hop word in before content" } },
+        { "n", "<leader>j", function() require("hop") vim.cmd("HopLineAC") end,{desc="hop line in after content" } },
+        { "n", "<leader>k", function() require("hop") vim.cmd("HopLineBC") end,{desc="hop line in before content" } },
+    }
 }
 
 vim.g.register_keymap(Base)
 vim.g.register_keymap(Plugin)
+
