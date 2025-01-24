@@ -1,5 +1,19 @@
 return {
     {
+        'numToStr/FTerm.nvim',
+        config = function()
+            require 'FTerm'.setup({
+                border     = 'single',
+                dimensions = {
+                    height = 0.7,
+                    width = 0.7,
+                    -- x = 0.9,
+                    -- y = 0.9,
+                },
+            })
+        end
+    },
+    {
         'mrjones2014/smart-splits.nvim',
         build = './kitty/install-kittens.bash',
         lazy = false,
