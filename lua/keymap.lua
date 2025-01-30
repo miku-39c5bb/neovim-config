@@ -52,7 +52,7 @@ local Base = {
         { "n", "gd", vim.lsp.buf.definition,    { desc = "go to definition" } },
     },
     fold = {
-        { "n", "<CR>",          "za", { desc = "toggle fold" } },
+        { "n", "<leader><CR>",          "za", { desc = "toggle fold" } },
         { "n", "<2-LeftMouse>", "za", { desc = "toggle fold" } },
     },
     modeSwitch = {
@@ -76,7 +76,9 @@ local Plugin = {
         { "n", "z",         function() require("fzf-lua").buffers() end,             { desc = "search buffer" }, },
         { "n", "ga",        function() require("fzf-lua").lsp_code_actions() end,    { desc = "code action" }, },
         { "n", "gr",        function() require("fzf-lua").lsp_references() end,      { desc = "find reference" }, },
+        { "n", "gR",        '<Cmd>lua vim.lsp.buf.references()<CR>',      { desc = "find reference" }, },
         { "n", "gi",        function() require("fzf-lua").lsp_implementations() end, { desc = "find implementations" }, },
+        { "n", "gI",        '<Cmd>lua vim.lsp.buf.implementation()<CR>',      { desc = "find reference" }, },
     },
     -- more keymaps in cmp.lua
     cmp = {},
