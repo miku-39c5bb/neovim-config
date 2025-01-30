@@ -1,3 +1,5 @@
 # neovim-config
 
-另一套参考配置
+第二套参考配置
+
+https://github.com/patricorgi/dotfiles/tree/main/.config/nvim
