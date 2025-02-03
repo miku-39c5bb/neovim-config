@@ -35,15 +35,12 @@ local Base = {
         { "x", "a",           "A",      { desc = "column append" } },
     },
     cmd = {
-        { { "n", "v" }, ";",          ":",                                                 { nowait = true, desc = "enter commandline mode" } },
-        { "n",          "q",          "<CMD>q!<CR>",                                       { desc = "quit neovim" } },
-        { "n",          "Q",          "q",                                                 { desc = "macro record" } },
-        { "n",          "g=",         vim.g.format,                                        { desc = "format document" } },
-        { "n",          "<leader>mk", "<CMD>wa<CR><CMD>!python3 ./build.py<CR>",           { desc = "build" } },
-        { "n",          "<leader>cl", "<CMD>!python3 ./build.py clean<CR>",                { desc = "build" } },
-        -- { "n",          "<leader>T",  "<CMD>split<CR><CMD>terminal<CR>",    { desc = "build" } },
-        { "n",          "<A-i>",      "<CMD>lua require('FTerm').toggle()<CR>",            { desc = "terminal" } },
-        { "t",          "<A-i>",      "<C-\\><C-n><CMD>lua require('FTerm').toggle()<CR>", { desc = "terminal" } },
+        { { "n", "v" }, ";",  ":",           { nowait = true, desc = "enter commandline mode" } },
+        { "n",          "q",  "<CMD>q!<CR>", { desc = "quit neovim" } },
+        { "n",          "Q",  "q",           { desc = "macro record" } },
+        { "n",          "g=", vim.g.format,  { desc = "format document" } },
+        -- { "n",          "<leader>mk", "<CMD>wa<CR><CMD>!python3 ./build.py<CR>",           { desc = "build" } },
+        -- { "n",          "<leader>cl", "<CMD>!python3 ./build.py clean<CR>",                { desc = "build" } },
     },
     lsp = {
         { "n", "gn", vim.lsp.buf.rename,        { desc = "rename symbol" } },
@@ -105,10 +102,12 @@ local Plugin = {
         end, { desc = "hop line in before content" } },
     },
     fterm = {
+        { "n", "<A-i>", "<CMD>lua require('FTerm').toggle()<CR>",            { desc = "open fterm" } },
+        { "t", "<A-i>", "<C-\\><C-n><CMD>lua require('FTerm').toggle()<CR>", { desc = "open fterm" } },
         { "n", "<A-g>", function()
             require("FTerm"):new({
                 ft = "fterm_git",
-                cmd="tig",
+                cmd = "tig",
                 -- cmd = "lazygit",
                 -- cmd="gitui",
                 dimensions = {
