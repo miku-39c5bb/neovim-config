@@ -69,6 +69,7 @@ return {
     {
         "ibhagwan/fzf-lua",
         config = true,
+        lazy = false,
     },
     {
         "windwp/nvim-autopairs",

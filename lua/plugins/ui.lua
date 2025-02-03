@@ -33,11 +33,9 @@ return {
         config = function()
             require('dashboard').setup {
                 -- config
-                theme = 'hyper',
+                -- theme = 'hyper',
+                theme = 'doom',
                 config = {
-                    -- week_header = {
-                    --     enable = true,
-                    -- },
                     header = {
                         '⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀',
                         '⠀⠀⠀⠀⠀⠀⠀⠀⢀⡴⠛⠛⠛⢻⣷⡄⠀⣀⣀⣐⣀⡀⠰⣿⣉⠉⠙⣆⡶⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀',
@@ -61,33 +59,66 @@ return {
                         '⢸⣿⣟⣶⣿⣿⢻⣧⢸⣷⣬⣿⡿⢿⡛⢹⣿⣟⣷⣶⣿⣝⢶⣝⣿⡞⣿⣿⡟⠉⢹⣿⣷⣿⣷⣿⡀⠀⠀⠀',
                         '⢾⣿⣻⣿⣿⣿⠈⢿⣿⣦⣴⣿⡿⠾⣿⣯⣿⣮⣽⣻⣿⣿⡿⢛⣯⣿⡿⠿⠖⠒⣻⡿⣿⣇⣀⣸⠟⢷⣦⠀',
                         '⢸⣿⣿⣿⣿⢹⡇⣼⢻⣧⣈⢹⣿⣷⣿⣾⣿⣿⣿⣿⠟⢹⠁⢈⣼⠟⠀⠀⠒⠚⢻⣿⣿⡏⠁⢹⠀⠀⢻⡄',
+                        '',
                     },
-                    shortcut = {
-                        -- { desc = '󰊳 Lazy', group = '@property', action = 'Lazy', key = 'l' },
-                        { desc = '  Lazy', group = '@property', action = 'Lazy', key = 'l' },
-                        { desc = '  Mason', group = '@property', action = 'Mason', key = 'm' },
-                        -- {
-                        --     icon = ' ',
-                        --     icon_hl = '@variable',
-                        --     desc = 'Files',
-                        --     group = 'Label',
-                        --     -- action = 'Telescope find_files',
-                        --     action = 'Fzflua files',
-                        --     key = 'f',
-                        -- },
-                        -- {
-                        --     desc = ' Apps',
-                        --     group = 'DiagnosticHint',
-                        --     action = 'Telescope app',
-                        --     key = 'a',
-                        -- },
-                        -- {
-                        --     desc = ' dotfiles',
-                        --     group = 'Number',
-                        --     action = 'Telescope dotfiles',
-                        --     key = 'd',
-                        -- },
+                    -- shortcut = {
+                    --     -- { desc = '󰊳 Lazy', group = '@property', action = 'Lazy', key = 'l' },
+                    --     { desc = '  Lazy', group = '@property', action = 'Lazy', key = 'l' },
+                    --     { desc = '  Mason', group = '@property', action = 'Mason', key = 'm' },
+                    --     -- {
+                    --     --     icon = ' ',
+                    --     --     desc = ' Apps',
+                    --     --     desc = ' dotfiles',
+                    --     -- },
+                    -- },
+                    center = {
+                        {
+                            icon = ' ',
+                            icon_hl = 'Title',
+                            desc = 'Lazy               ',
+                            desc_hl = 'String',
+                            key = 'l',
+                            key_hl = 'Number',
+                            action = 'Lazy'
+                        },
+                        {
+                            icon = ' ',
+                            icon_hl = 'Title',
+                            desc = 'Mason',
+                            desc_hl = 'String',
+                            key = 'm',
+                            key_hl = 'Number',
+                            action = 'Mason'
+                        },
+                        {
+                            icon = ' ',
+                            icon_hl = 'Title',
+                            desc = 'Files',
+                            desc_hl = 'String',
+                            key = 'f',
+                            key_hl = 'Number',
+                            action = 'FzfLua files'
+                        },
+                        {
+                            icon = ' ',
+                            icon_hl = 'Title',
+                            desc = 'Words',
+                            desc_hl = 'String',
+                            key = 'w',
+                            key_hl = 'Number',
+                            action = 'FzfLua live_grep'
+                        },
+                        {
+                            icon = ' ',
+                            icon_hl = 'Title',
+                            desc = 'Quit',
+                            desc_hl = 'String',
+                            key = 'q',
+                            key_hl = 'Number',
+                            action = 'q'
+                        },
                     },
+                    footer = {} --your footer
                 },
             }
         end,
