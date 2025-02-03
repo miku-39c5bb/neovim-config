@@ -52,7 +52,7 @@ local Base = {
         { "n", "gd", vim.lsp.buf.definition,    { desc = "go to definition" } },
     },
     fold = {
-        { "n", "<leader><CR>",          "za", { desc = "toggle fold" } },
+        { "n", "<leader><CR>",  "za", { desc = "toggle fold" } },
         { "n", "<2-LeftMouse>", "za", { desc = "toggle fold" } },
     },
     modeSwitch = {
@@ -76,9 +76,9 @@ local Plugin = {
         { "n", "z",         function() require("fzf-lua").buffers() end,             { desc = "search buffer" }, },
         { "n", "ga",        function() require("fzf-lua").lsp_code_actions() end,    { desc = "code action" }, },
         { "n", "gr",        function() require("fzf-lua").lsp_references() end,      { desc = "find reference" }, },
-        { "n", "gR",        '<Cmd>lua vim.lsp.buf.references()<CR>',      { desc = "find reference" }, },
+        { "n", "gR",        '<Cmd>lua vim.lsp.buf.references()<CR>',                 { desc = "find reference" }, },
         { "n", "gi",        function() require("fzf-lua").lsp_implementations() end, { desc = "find implementations" }, },
-        { "n", "gI",        '<Cmd>lua vim.lsp.buf.implementation()<CR>',      { desc = "find reference" }, },
+        { "n", "gI",        '<Cmd>lua vim.lsp.buf.implementation()<CR>',             { desc = "find reference" }, },
     },
     -- more keymaps in cmp.lua
     cmp = {},
@@ -87,13 +87,50 @@ local Plugin = {
     -- more keymaps in neotree.lua
     neotree = { { "n", "t", function() vim.cmd("Neotree reveal toggle") end, { desc = "toggle neotree" }, }, },
     hop = {
-        { "n", "<leader>e", function() require("hop") vim.cmd("HopWordAC") end,{desc="hop word in after content" } },
-        { "n", "<leader>b", function() require("hop") vim.cmd("HopWordBC") end,{desc="hop word in before content" } },
-        { "n", "<leader>j", function() require("hop") vim.cmd("HopLineAC") end,{desc="hop line in after content" } },
-        { "n", "<leader>k", function() require("hop") vim.cmd("HopLineBC") end,{desc="hop line in before content" } },
-    }
+        { "n", "<leader>e", function()
+            require("hop")
+            vim.cmd("HopWordAC")
+        end, { desc = "hop word in after content" } },
+        { "n", "<leader>b", function()
+            require("hop")
+            vim.cmd("HopWordBC")
+        end, { desc = "hop word in before content" } },
+        { "n", "<leader>j", function()
+            require("hop")
+            vim.cmd("HopLineAC")
+        end, { desc = "hop line in after content" } },
+        { "n", "<leader>k", function()
+            require("hop")
+            vim.cmd("HopLineBC")
+        end, { desc = "hop line in before content" } },
+    },
+    fterm = {
+        { "n", "<A-g>", function()
+            require("FTerm"):new({
+                ft = "fterm_git",
+                cmd="tig",
+                -- cmd = "lazygit",
+                -- cmd="gitui",
+                dimensions = {
+                    height = 0.9,
+                    width = 0.9,
+                }
+            }):toggle()
+        end, { desc = "open git in fterm" } },
+        { "n", "<leader>g", function()
+            require("FTerm"):new({
+                ft = "fterm_git",
+                -- cmd="tig",
+                cmd = "lazygit",
+                -- cmd="gitui",
+                dimensions = {
+                    height = 0.9,
+                    width = 0.9,
+                }
+            }):toggle()
+        end, { desc = "open git in fterm" } },
+    },
 }
 
 vim.g.register_keymap(Base)
 vim.g.register_keymap(Plugin)
-
